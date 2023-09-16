@@ -62,6 +62,7 @@ jobs:
           --build-arg POETRY_VERSION=${{ matrix.poetry-version }}
           --build-arg MULTI=${{ matrix.multi }}
           --build-arg PYTHON_VERSION=${{ matrix.python-version }}
-          --cache-to type=gha,mode=max --cache-from type=gha
+          --cache-to type=gha,mode=max,scope=$GITHUB_REF_NAME-${{ matrix.poetry-version }}${{ matrix.multi }}-${{ matrix.python-version }}
+          --cache-from type=gha,scope=$GITHUB_REF_NAME-${{ matrix.poetry-version }}${{ matrix.multi }}-${{ matrix.python-version }}
           --platform=linux/arm64,linux/amd64
           ${TAG_ARGS} .
