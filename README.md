@@ -31,5 +31,5 @@ Tags for this image follow a specific format:
 
 ### Examples
 
-- `1.6.1-py3.10-slim`: This denotes an image with Poetry version 1.6.1 and Python version 3.10 (using the slim variant).
+- `1.6.1-py3.10-slim`: This indicates Poetry version 1.6.1 and Python version 3.10 (using the slim variant).
 - `1.6.1-multi-py3.11`: This indicates Poetry version 1.6.1, configured with multiproject plugins, and Python version 3.11.
