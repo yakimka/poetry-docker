@@ -48,7 +48,7 @@ jobs:
         uses: crazy-max/ghaction-github-runtime@v3
 
       - name: Create tag string
-        run: echo "TAG_ARGS=-t ${IMAGE_FULL_NAME}:${{ matrix.poetry-version }}${{ matrix.multi == true && '-multi' || '' }}-${{ matrix.python-version }}" >> $GITHUB_ENV
+        run: echo "TAG_ARGS=-t ${IMAGE_FULL_NAME}:${{ matrix.poetry-version }}${{ matrix.multi == true && '-multi' || '' }}-py${{ matrix.python-version }}" >> $GITHUB_ENV
 
       - name: Set push flag
         if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
@@ -56,12 +56,12 @@ jobs:
 
       - run: echo $TAG_ARGS
 
-#      - name: Build image
-#        run: >
-#          docker buildx build ${PUSH_FLAG:-}
-#          --build-arg POETRY_VERSION=${{ matrix.poetry-version }}
-#          --build-arg MULTI=${{ matrix.multi }}
-#          --build-arg PYTHON_VERSION=${{ matrix.python-version }}
-#          --cache-to type=gha,mode=max --cache-from type=gha
-#          --platform=linux/arm64,linux/amd64
-#          ${TAG_ARGS} .
+      - name: Build image
+        run: >
+          docker buildx build ${PUSH_FLAG:-}
+          --build-arg POETRY_VERSION=${{ matrix.poetry-version }}
+          --build-arg MULTI=${{ matrix.multi }}
+          --build-arg PYTHON_VERSION=${{ matrix.python-version }}
+          --cache-to type=gha,mode=max --cache-from type=gha
+          --platform=linux/arm64,linux/amd64
+          ${TAG_ARGS} .
