@@ -15,7 +15,7 @@ RUN python -m pip install --no-cache-dir --upgrade pip \
     && python -m pip install --no-cache-dir poetry==$POETRY_VERSION \
     && if [ "$MULTI" != false ] ; then poetry self add poetry-multiproject-plugin poetry-polylith-plugin ; fi
 
-ARG USER_ID=1000
+ARG USER_ID=1001
 ARG USER_NAME=poetry
 
 RUN useradd --uid "$USER_ID" -ms /bin/bash  "$USER_NAME"
